@@ -1,0 +1,8 @@
+if calculate_sum():
+    total = 0
+    counter = 0
+    start = 4
+    while counter < 10:
+        total = total + start
+        counter = counter + 1
+    return total
