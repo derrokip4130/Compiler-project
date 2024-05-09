@@ -6,9 +6,9 @@ invalid_tokens = []
 
 def tokenize(file_path):
     identified_tokens = []
-    line_number = 1  # Initialize line number
+    line_number = 1 
     with open(file_path, 'r') as file:
-        content = file.readlines()  # Read lines of the file
+        content = file.readlines()
 
     token_list = []
     for line in content:
@@ -18,17 +18,17 @@ def tokenize(file_path):
             for token, token_regex in TOKEN_TYPES.items():
                 match = re.match(token_regex, identified_token)
                 if match:
-                    token_list.append((token, identified_token, line_number))  # Store token and line number
+                    token_list.append((token, identified_token, line_number))
                     matched = True
                     break
             if not matched:
                 invalid_tokens.append(identified_token)
-        line_number += 1  # Increment line number
+        line_number += 1
 
     return token_list
 
 if __name__ == '__main__':
-    file_path = 'sample_code.txt'
+    file_path = 'new.txt'
     tokens = tokenize(file_path)
     for token in tokens:
         print(token)

@@ -1,9 +1,16 @@
-reg_expressions = r'".*?"|\b(?:if|else|for|while|print|def|return)\b|\b(?:\d+\.\d+|\d+\.|\.\d+|\d+)\b|\b(?:\w+)\b|[+\-*/=><]|[():;]'
+reg_expressions = r'".*?"|\b(?:if|else|for|while|print|def|return|main)\b|\b(?:\d+\.\d+|\d+\.|\.\d+|\d+)\b|\b(?:\w+)\b|[+\-*/=><]|[():;]'
 TOKEN_TYPES = {
     'STRING': r'".*?"',
-    'KEYWORD': r'\b(?:if|else|for|while|print|def|return)\b',
-    'NUMBER': r'\b(?:\d+\.\d+|\d+\.|\.\d+|\d+)\b',
-    'IDENTIFIER': r'(?!if|else|for|while|print|def|return)([a-zA-Z][a-zA-Z0-9_]*)',
+    'MAIN_KEYWORD': r'\b(?:main)\b',
+    'IF_KEYWORD': r'\b(?:if)\b',
+    'DEF_KEYWORD': r'\b(?:def)\b',
+    'FOR_KEYWORD': r'\b(?:for)\b',
+    'WHILE_KEYWORD': r'\b(?:while)\b',
+    'PRINT_KEYWORD': r'\b(?:print)\b',
+    'RET_KEYWORD': r'\b(?:return)\b',
+    'INTEGER': r'(?!\d+\.\d+)\b(\d+)\b',
+    'FLOAT': r'\b(?:\d+\.\d+)\b',
+    'IDENTIFIER': r'(?!if|else|for|while|print|def|return|main)([a-zA-Z][a-zA-Z0-9_]*)',
     'L_BRACKET': r'[(]',
     'R_BRACKET': r'[)]',
     'COLON': r'[:]',
