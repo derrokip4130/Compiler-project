@@ -31,8 +31,8 @@ if __name__ == '__main__':
     file_path = 'new.txt'
     tokens = tokenize(file_path)
     for token in tokens:
-        print(token)
+        print(f"{token[0]}:{token[1]} on line {token[2]}")
     if invalid_tokens:
-        print("\nInvalid Tokens found:")
+        print("\nINVALID TOKENS\n")
         for invalid_token in invalid_tokens:
             print(invalid_token)
