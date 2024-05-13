@@ -21,7 +21,7 @@ class Parser:
             print("Parsing successful.")
             return tree
         except SyntaxError as e:
-            print(f"Syntax error on line {self.current_token[2]}: {e}")
+            print(f"Syntax error on line {self.current_token[2]}")
             return None
 
     def match(self, token_type):
