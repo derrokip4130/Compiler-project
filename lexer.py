@@ -22,17 +22,18 @@ def tokenize(file_path):
                     matched = True
                     break
             if not matched:
-                invalid_tokens.append(identified_token)
+                invalid_tokens.append((identified_token, line_number))
         line_number += 1
 
     return token_list
 
 if __name__ == '__main__':
-    file_path = 'new.txt'
+    file_path = 'sample_code.txt'
     tokens = tokenize(file_path)
+    print("\nTOKENS FOUND\n")
     for token in tokens:
         print(f"{token[0]}:{token[1]} on line {token[2]}")
     if invalid_tokens:
         print("\nINVALID TOKENS\n")
         for invalid_token in invalid_tokens:
-            print(invalid_token)
+            print(f"{invalid_token[0]} on line {invalid_token[1]}")

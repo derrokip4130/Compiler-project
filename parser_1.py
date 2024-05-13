@@ -159,7 +159,7 @@ if __name__ == '__main__':
     if invalid_tokens:
         print("\nINVALID TOKENS\n")
         for invalid_token in invalid_tokens:
-            print(invalid_token)
+            print(f"{invalid_token[0]} on line {invalid_token[1]}")
     print("\n")
     parser = Parser(tokens)
     parse_tree = parser.parse()
