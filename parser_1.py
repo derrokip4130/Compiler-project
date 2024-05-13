@@ -153,7 +153,17 @@ class Parser:
 
 if __name__ == '__main__':
     tokens = tokenize("sample_code.txt")
+    print("\nTOKENS FOUND\n")
+    for token in tokens:
+        print(f"{token[0]}:{token[1]} on line {token[2]}")
+    if invalid_tokens:
+        print("\nINVALID TOKENS\n")
+        for invalid_token in invalid_tokens:
+            print(invalid_token)
+    print("\n")
     parser = Parser(tokens)
     parse_tree = parser.parse()
+    print("\n")
     if parse_tree:
+        print("PARSE TREE:\n")
         parser.print_tree(parse_tree)
