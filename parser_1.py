@@ -1,4 +1,4 @@
-from lexer import tokenize
+from lexer import tokenize, invalid_tokens
 
 class Parser:
     def __init__(self, tokens):
@@ -108,3 +108,21 @@ class Parser:
             self.match('STRING')
         else:
             raise SyntaxError(f"Invalid factor: {self.current_token}")
+        
+
+if __name__ == '__main__':
+    file_path = 'new.txt'
+    tokens = tokenize(file_path)
+    print("\nTOKENS\n")
+    for token in tokens:
+        print(f"{token[0]}: {token[1]} on line {token[2]}")
+    if invalid_tokens:
+        print("\n")
+        for invalid_token in invalid_tokens:
+            print(invalid_token)
+    parser = Parser(tokens)
+    print("\n")
+    try:
+        parser.parse()
+    except SyntaxError as e:
+        print(f"Syntax error: {e}")
