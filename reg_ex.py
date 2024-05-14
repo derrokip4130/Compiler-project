@@ -3,6 +3,7 @@ TOKEN_TYPES = {
     'STRING': r'".*?"',
     'MAIN_KEYWORD': r'\b(main)\b',
     'IF_KEYWORD': r'\b(if)\b',
+    'ELSE_KEYWORD': r'\b(else)\b',
     'DEF_KEYWORD': r'\b(def)\b',
     'FOR_KEYWORD': r'\b(for)\b',
     'WHILE_KEYWORD': r'\b(while)\b',
