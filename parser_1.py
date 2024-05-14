@@ -21,7 +21,7 @@ class Parser:
             print("Parsing successful.")
             return tree
         except SyntaxError as e:
-            print(f"Syntax error on line {self.current_token[2]}")
+            print(f"Syntax error on line {self.current_token[2]}: {e}")
             return None
 
     def match(self, token_type):
@@ -33,6 +33,11 @@ class Parser:
             return Node(token_type, lexeme)
         else:
             raise SyntaxError(f"Expected {token_type}, found {self.current_token[0]}")
+        
+    def check_line_number(self, line_number):
+        #print(self.tokens[self.token_index-1],line_number, self.current_token)
+        if self.tokens[self.token_index-1][2] == line_number:
+            raise SyntaxError(f'{self.current_token[0]} {self.current_token[1]} expected on next line')
 
     def program(self):
         if self.current_token[1] != 'def':
@@ -66,6 +71,8 @@ class Parser:
             tree.add_child(self.print_statement())
         elif self.current_token[1] == 'if':
             tree.add_child(self.conditional())
+        elif self.current_token[1] == 'else':
+            tree.add_child(self.else_statement())
         elif self.current_token[1] == 'while':
             tree.add_child(self.loop())
         elif self.current_token[1] == 'return':
@@ -76,6 +83,7 @@ class Parser:
 
     def assignment(self):
         tree = Node('ASSIGNMENT', '')
+        self.check_line_number(self.current_token[2])
         tree.add_child(self.match('IDENTIFIER'))
         tree.add_child(self.match('ASSIGNMENT_OPERATOR'))
         tree.add_child(self.expression())
@@ -83,14 +91,24 @@ class Parser:
 
     def conditional(self):
         tree = Node('CONDITIONAL', '')
+        self.check_line_number(self.current_token[2])
         tree.add_child(self.match('IF_KEYWORD'))
         tree.add_child(self.expression())
+        tree.add_child(self.match('COLON'))
+        tree.add_child(self.statement_list())
+        return tree
+    
+    def else_statement(self):
+        tree = Node('CONDITIONAL', '')
+        self.check_line_number(self.current_token[2])
+        tree.add_child(self.match('ELSE_KEYWORD'))
         tree.add_child(self.match('COLON'))
         tree.add_child(self.statement_list())
         return tree
 
     def loop(self):
         tree = Node('LOOP', '')
+        self.check_line_number(self.current_token[2])
         tree.add_child(self.match('WHILE_KEYWORD'))
         tree.add_child(self.expression())
         tree.add_child(self.match('COLON'))
@@ -99,6 +117,7 @@ class Parser:
 
     def print_statement(self):
         tree = Node('PRINT', '')
+        self.check_line_number(self.current_token[2])
         tree.add_child(self.match('PRINT_KEYWORD'))
         tree.add_child(self.match('L_BRACKET'))
         if self.current_token[0] == 'STRING':
@@ -110,6 +129,7 @@ class Parser:
 
     def return_statement(self):
         tree = Node('RETURN', '')
+        self.check_line_number(self.current_token[2])
         tree.add_child(self.match('RET_KEYWORD'))
         if self.current_token[0] == 'INTEGER' and self.current_token[1] == '0':
             tree.add_child(self.match('INTEGER'))
