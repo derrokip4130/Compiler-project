@@ -9,6 +9,7 @@ TOKEN_TYPES = {
     'WHILE_KEYWORD': r'\b(while)\b',
     'PRINT_KEYWORD': r'\b(print)\b',
     'RET_KEYWORD': r'\b(return)\b',
+    'END_KEYWORD': r'\b(end)\b',
     'INTEGER': r'(?!\d+\.\d+)\b(\d+)\b',
     'FLOAT': r'\b(\d+\.\d+)\b',
     'IDENTIFIER': r'\b(?!if|else|for|while|print|def|return|main)([a-zA-Z][a-zA-Z0-9_]*)\b',

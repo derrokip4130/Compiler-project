@@ -58,9 +58,10 @@ class Parser:
 
     def statement_list(self):
         tree = Node('STATEMENT_LIST', '')
-        tree.add_child(self.statement())
-        if self.token_index < len(self.tokens) and self.tokens[self.token_index][1] != 'def':
-            tree.add_child(self.statement_list())
+        while self.token_index < len(self.tokens) and self.tokens[self.token_index][1] != 'def':
+            if self.current_token[1] == 'end':
+                return tree
+            tree.add_child(self.statement())
         return tree
 
     def statement(self):
@@ -96,6 +97,10 @@ class Parser:
         tree.add_child(self.expression())
         tree.add_child(self.match('COLON'))
         tree.add_child(self.statement_list())
+        if self.current_token[1] == 'end':
+            self.match('END_KEYWORD')
+        else:
+            raise SyntaxError("Expected 'end' keyword after conditional block.")
         return tree
     
     def else_statement(self):
@@ -104,6 +109,10 @@ class Parser:
         tree.add_child(self.match('ELSE_KEYWORD'))
         tree.add_child(self.match('COLON'))
         tree.add_child(self.statement_list())
+        if self.current_token[1] == 'end':
+            self.match('END_KEYWORD')
+        else:
+            raise SyntaxError("Expected 'end' keyword after else block.")
         return tree
 
     def loop(self):
@@ -113,6 +122,10 @@ class Parser:
         tree.add_child(self.expression())
         tree.add_child(self.match('COLON'))
         tree.add_child(self.statement_list())
+        if self.current_token[1] == 'end':
+            self.match('END_KEYWORD')
+        else:
+            raise SyntaxError("Expected 'end' keyword after while block.")
         return tree
 
     def print_statement(self):
@@ -186,4 +199,5 @@ if __name__ == '__main__':
     print("\n")
     if parse_tree:
         print("PARSE TREE:\n")
-        parser.print_tree(parse_tree)
+        #parser.print_tree(parse_tree)
+        print(parse_tree)
