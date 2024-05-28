@@ -1,4 +1,14 @@
-from lexer import tokenize 
+from lexer import tokenize
+
+def print_line(input_number):
+    file = open("sample_code.txt", "r")
+    content = file.readlines()
+    line_number = 0
+    for line in content:
+        line_number += 1
+        if line_number == input_number:
+            output_line = line
+    return output_line
 
 class Node:
     def __init__(self, token_type, lexeme):
@@ -79,7 +89,8 @@ class Parser:
         elif self.current_token[1] == 'return':
             tree.add_child(self.return_statement())
         else:
-            raise SyntaxError(f"Invalid statement: {self.current_token}")
+            line = print_line(self.current_token[2])
+            raise SyntaxError(f"Invalid statement: \n{line}")
         return tree
 
     def assignment(self):
