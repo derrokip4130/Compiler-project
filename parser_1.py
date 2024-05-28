@@ -1,4 +1,4 @@
-from lexer import tokenize, invalid_tokens 
+from lexer import tokenize 
 
 class Node:
     def __init__(self, token_type, lexeme):
@@ -185,7 +185,7 @@ class Parser:
                 self.print_tree(child, depth + 1)
 
 if __name__ == '__main__':
-    tokens = tokenize("sample_code.txt")
+    tokens, invalid_tokens = tokenize("sample_code.txt")
     print("\nTOKENS FOUND\n")
     for token in tokens:
         print(f"{token[0]}:{token[1]} on line {token[2]}")

@@ -25,7 +25,7 @@ def tokenize(file_path):
                 invalid_tokens.append((identified_token, line_number))
         line_number += 1
 
-    return token_list
+    return token_list, invalid_tokens
 
 if __name__ == '__main__':
     file_path = 'sample_code.txt'
