@@ -1,4 +1,4 @@
-reg_expressions = r'".*?"|\b(?:if|else|for|while|print|def|return|main)\b|\b(?:\d+\.\d+|\d+\.|\.\d+|\d+)\b|\b(?:\w+)\b|[+\-*/=><]|[():;]'
+reg_expressions = r'".*?"|\b(?:if|else|for|while|print|def|return|main)\b|\b(?:\d+\.\d+|\d+\.|\.\d+|\d+)\b|\b(?:\w+)\b|[%+\-*/=><]|[():;]'
 TOKEN_TYPES = {
     'STRING': r'".*?"',
     'MAIN_KEYWORD': r'\b(main)\b',
@@ -22,5 +22,6 @@ TOKEN_TYPES = {
     'SUM_OPERATOR': r'[+]',
     'SUB_OPERATOR': r'[-]',
     'MULT_OPERATOR': r'[*]',
-    'DIV_OPERATOR': r'[/]'
+    'DIV_OPERATOR': r'[/]',
+    'MODULUS_OPERATOR': r'[%]'
 }

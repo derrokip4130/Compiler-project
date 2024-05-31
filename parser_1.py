@@ -170,7 +170,7 @@ class Parser:
     def term(self):
         tree = Node('TERM', '')
         tree.add_child(self.factor())
-        if self.current_token[0] in ['SUM_OPERATOR', 'SUB_OPERATOR', 'DIV_OPERATOR', 'MULT_OPERATOR'] and self.current_token[1] in ['+', '-', '*', '/']:
+        if self.current_token[0] in ['SUM_OPERATOR', 'SUB_OPERATOR', 'DIV_OPERATOR', 'MULT_OPERATOR', 'MODULUS_OPERATOR'] and self.current_token[1] in ['+', '-', '*', '/', '%']:
             tree.add_child(self.match(self.current_token[0]))
             tree.add_child(self.factor())
         return tree
