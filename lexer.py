@@ -29,7 +29,7 @@ def tokenize(file_path):
 
 if __name__ == '__main__':
     file_path = 'sample_code.txt'
-    tokens = tokenize(file_path)
+    tokens, invalid_tokens = tokenize(file_path)
     print("\nTOKENS FOUND\n")
     for token in tokens:
         print(f"{token[0]}:{token[1]} on line {token[2]}")
